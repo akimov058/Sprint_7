@@ -1,9 +1,7 @@
 import allure
-import requests
 import pytest
-from methods.base_api import BaseApi
 from methods.create_orders_api import CreateOrdersApi
-from data.login_courier_data import LoginCourierData
+from data.create_orders_data import CreateOrdersData
 
 class TestCreateOrders:
     @pytest.mark.parametrize("order_date", [
@@ -28,7 +26,7 @@ class TestCreateOrders:
                  'comment': 'Просто по красота', 'color': ''}
         )
     ])
-    @allure.title('курьер может авторизоваться')
+    @allure.title('Создание заказа')
     def test_create_orders(self, order_date):
         response_create = CreateOrdersApi.post_login_courier(order_date['first_name'],
                                                              order_date['last_name'],
@@ -39,4 +37,4 @@ class TestCreateOrders:
                                                              order_date['delivery_date'],
                                                              order_date['comment'],
                                                              order_date['color'],)
-        assert response_create.status_code == 201 and 'track' in response_create.text
+        assert response_create.status_code == 201 and CreateOrdersData.TEXT_CREATE_ORDERS_200 in response_create.text

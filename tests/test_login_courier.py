@@ -13,7 +13,7 @@ class TestLoginCourier:
         first_name = generate_random_string
         response_create = BaseApi.post_create_courier(login, password, first_name)
         response_login = LoginCourierApi.post_login_courier(login,password)
-        assert response_login.status_code == 200 and 'id' in response_login.text
+        assert response_login.status_code == 200 and LoginCourierData.TEXT_LOGIN_COURIER_200 in response_login.text
 
     @allure.title('для авторизации нужно передать все обязательные поля, не передан логин')
     def test_login_courier_no_login_error(self, generate_random_string):
