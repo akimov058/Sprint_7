@@ -37,3 +37,12 @@ class TestLoginCourier:
     def test_login_courier_no_exist_courier_error(self):
         response_login = LoginCourierApi.post_login_courier('Akimov_test','123')
         assert response_login.status_code == 404 and  response_login.text == LoginCourierData.TEXT_LOGIN_COURIER_404
+
+    @allure.title('система вернёт ошибку, если неправильно указать пароль')
+    def test_login_courier_wrong_password_error(self,generate_random_string):
+        login = generate_random_string
+        password = generate_random_string
+        first_name = generate_random_string
+        response_create = BaseApi.post_create_courier(login, password, first_name)
+        response_login = LoginCourierApi.post_login_courier(login,'123')
+        assert response_login.status_code == 404 and  response_login.text == LoginCourierData.TEXT_LOGIN_COURIER_404
