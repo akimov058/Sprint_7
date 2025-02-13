@@ -7,4 +7,5 @@ class TestGetOrders:
     @allure.title('Проверь, что в тело ответа возвращается список заказов.')
     def test_get_orders(self):
         response_orders = GetOrdersApi.get_orders()
-        assert response_orders.status_code == 200 and GetOrdersData.TEXT_GET_ORDERS_200 in response_orders.text
+        with allure.step('Проверяем код и текст ответа'):
+            assert response_orders.status_code == 200 and GetOrdersData.TEXT_GET_ORDERS_200 in response_orders.text

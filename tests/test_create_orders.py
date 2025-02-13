@@ -37,4 +37,5 @@ class TestCreateOrders:
                                                              order_date['delivery_date'],
                                                              order_date['comment'],
                                                              order_date['color'],)
-        assert response_create.status_code == 201 and CreateOrdersData.TEXT_CREATE_ORDERS_200 in response_create.text
+        with allure.step('Проверяем код и текст ответа'):
+            assert response_create.status_code == 201 and CreateOrdersData.TEXT_CREATE_ORDERS_200 in response_create.text
