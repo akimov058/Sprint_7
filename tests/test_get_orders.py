@@ -4,7 +4,7 @@ from methods.get_orders_api import GetOrdersApi
 from data.get_orders_data import GetOrdersData
 
 class TestGetOrders:
-    @allure.title('Проверь, что в тело ответа возвращается список заказов.')
+    @allure.title('Проверяем, что в тело ответа возвращается список заказов.')
     def test_get_orders(self):
         response_orders = GetOrdersApi.get_orders()
         with allure.step('Проверяем код и текст ответа'):

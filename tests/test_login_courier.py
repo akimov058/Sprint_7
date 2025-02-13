@@ -5,7 +5,7 @@ from methods.login_courier_api import LoginCourierApi
 from data.login_courier_data import LoginCourierData
 
 class TestLoginCourier:
-    @allure.title('курьер может авторизоваться')
+    @allure.title('Авторизация')
     def test_login_courier(self, generate_random_string):
         login = generate_random_string
         password = generate_random_string
@@ -15,7 +15,7 @@ class TestLoginCourier:
         with allure.step('Проверяем код и текст ответа'):
             assert response_login.status_code == 200 and LoginCourierData.TEXT_LOGIN_COURIER_200 in response_login.text
 
-    @allure.title('для авторизации нужно передать все обязательные поля, не передан логин')
+    @allure.title('Авторизация - не передан логин')
     def test_login_courier_no_login_error(self, generate_random_string):
         login = generate_random_string
         password = generate_random_string
@@ -25,7 +25,7 @@ class TestLoginCourier:
         with allure.step('Проверяем код и текст ответа'):
             assert response_login.status_code == 400 and  response_login.text == LoginCourierData.TEXT_LOGIN_COURIER_400
 
-    @allure.title('для авторизации нужно передать все обязательные поля, не передан пароль')
+    @allure.title('Авторизация - не передан пароль')
     def test_login_courier_no_password_error(self, generate_random_string):
         login = generate_random_string
         password = generate_random_string
@@ -35,13 +35,13 @@ class TestLoginCourier:
         with allure.step('Проверяем код и текст ответа'):
             assert response_login.status_code == 400 and  response_login.text == LoginCourierData.TEXT_LOGIN_COURIER_400
 
-    @allure.title('если авторизоваться под несуществующим пользователем, запрос возвращает ошибку')
+    @allure.title('Авторизация под несуществующим пользователем, запрос возвращает ошибку')
     def test_login_courier_no_exist_courier_error(self):
         response_login = LoginCourierApi.post_login_courier('Akimov_test','123')
         with allure.step('Проверяем код и текст ответа'):
             assert response_login.status_code == 404 and  response_login.text == LoginCourierData.TEXT_LOGIN_COURIER_404
 
-    @allure.title('система вернёт ошибку, если неправильно указать пароль')
+    @allure.title('Авторизация - неправильно указать пароль')
     def test_login_courier_wrong_password_error(self,generate_random_string):
         login = generate_random_string
         password = generate_random_string
