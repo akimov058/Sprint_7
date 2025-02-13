@@ -1,5 +1,4 @@
 import allure
-import requests
 import pytest
 from methods.base_api import BaseApi
 from methods.login_courier_api import LoginCourierApi
